@@ -1,11 +1,11 @@
-def lintChecks(){
+def lintChecks(component){
     sh " echo Installing Jslints"
     //sh "npm install jslint"
     //sh "./node_modules/jslint/bin/jslint.js server.js"
-    sh " echo lint checks completed.....!!!!!"
+    sh " echo lint checks completed for ${component}.....!!!!!"
 }
 
-def call()
+def call(component)
 {
     pipeline {
         agent any
@@ -14,7 +14,7 @@ def call()
                 steps {
                     script
                     {
-                        lintChecks()
+                        lintChecks(component)
                     }
                 }
             }
