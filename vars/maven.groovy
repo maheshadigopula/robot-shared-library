@@ -1,5 +1,4 @@
-
-def nodejs(component){
+def lintChecks(){
     sh " echo Installing Jslints"
     //sh "npm install jslint"
     //sh "./node_modules/jslint/bin/jslint.js server.js"
@@ -8,25 +7,25 @@ def nodejs(component){
 
 def call()
 {
-pipeline {
-    agent any
-    stages{
-        stage('Lint checks'){
-            steps {
-                script
-                {
-                    maven.nodejs(component)
+    pipeline {
+        agent any
+        stages{
+            stage('Lint checks'){
+                steps {
+                    script
+                    {
+                        lintChecks()
+                    }
+                }
+            }
+
+            stage('Downloading Dependencies'){
+                steps{
+                    //sh "npm install"
+                    sh "echo npm install"
                 }
             }
         }
-
-        stage('Downloading Dependencies'){
-            steps{
-                //sh "npm install"
-                sh "echo npm install"
-            }
-        }
     }
-}
 }
 
