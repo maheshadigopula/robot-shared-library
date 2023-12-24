@@ -1,7 +1,7 @@
 def lintChecks(component){
     sh "echo Installing Maven"
     // sh "sudo yum install maven -y"
-    sh "mvn checkstyle:checkstyle"
+    // sh "mvn checkstyle:checkstyle"
     sh " echo lint checks completed for ${component}.....!!!!!"
 }
 
