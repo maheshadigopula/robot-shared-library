@@ -27,6 +27,7 @@ def call(component)
                     script
                     {
                         lintChecks(component)
+                        sonarChecks(component)
                     }
                 }
             }
