@@ -20,7 +20,6 @@ def call(component)
 
         environment {
             sonar = credentials('sonar')
-            url = 172.31.0.188
         }
         stages{
             stage('Lint checks'){
