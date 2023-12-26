@@ -8,7 +8,7 @@ def lintChecks(component){
 
 def sonarChecks(component){
     sh " echo Starting the quality check..."
-    sh " sonar-scanner -Dsonar.host.url=http://${sonar_URL}:9000 -Dsonar.source=. -Dsonar.projectKey=catalogue -Dsonar.login=admin -Dsonar.password=123 "
+    sh " sonar-scanner -Dsonar.host.url=http://${sonar_URL}:9000 -Dsonar.source=. -Dsonar.projectKey=${component} -Dsonar.login=admin -Dsonar.password=123 "
     sh " curl https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonar-scanner/quality-gate > quality-gate.sh"
     sh " bash -x quality-gate.sh ${sonar_USR} ${sonar_PSW} ${sonar_URL} ${component}"
     sh " echo lint checks completed for ${component}.....!!!!!"
@@ -19,6 +19,11 @@ def call(component)
 {
     pipeline {
         agent any
+
+        environment {
+            sonar = credentials('sonar')
+            sonar_URL = "172.31.0.172"
+        }
         stages{
             stage('Lint checks'){
                 steps {
