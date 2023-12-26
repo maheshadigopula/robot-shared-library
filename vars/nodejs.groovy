@@ -27,6 +27,14 @@ def call(component)
                     script
                     {
                         lintChecks(component)
+                    }
+                }
+            }
+
+            stage('Sonar checks'){
+                steps {
+                    script
+                    {
                         sonarChecks(component)
                     }
                 }
