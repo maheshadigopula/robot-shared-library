@@ -7,7 +7,7 @@ def lintChecks(component){
 
 def sonarChecks(component){
     sh " echo Starting the quality check..."
-    sh "sonar-scanner -Dsonar.host.url=http://172.31.0.188:9000 -Dsonar.source=. -Dsonar.projectKey=catalogue -Dsonar.login=admin -Dsonar.password=123 "
+    sh "sonar-scanner -Dsonar.host.url=http://172.31.0.172:9000 -Dsonar.source=. -Dsonar.projectKey=catalogue -Dsonar.login=admin -Dsonar.password=123 "
     //sh "./node_modules/jslint/bin/jslint.js server.js"
     sh " echo lint checks completed for ${component}.....!!!!!"
 }
