@@ -28,6 +28,15 @@ def call(component)
                     }
                 }
             }
+
+            stage('Sonar checks'){
+                steps {
+                    script
+                    {
+                        sonarChecks(component)
+                    }
+                }
+            }
         }
     }
 }
