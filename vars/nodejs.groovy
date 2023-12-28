@@ -13,7 +13,6 @@ def sonarChecks(component){
     sh " echo lint checks completed for ${component}.....!!!!!"
 }
 
-
 def call(component)
 {
     pipeline {
@@ -44,8 +43,8 @@ def call(component)
 
             stage('Downloading Dependencies'){
                 steps{
-                    //sh "npm install"
-                    sh "echo npm install"
+                    sh "echo Installing npm!!!!!!"
+                    sh "npm install"
                 }
             }
         }
