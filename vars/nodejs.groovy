@@ -44,7 +44,7 @@ def call(component)
             stage('Downloading Dependencies'){
                 steps{
                     sh "echo Installing npm!!!!!!"
-                    sh "npm install"
+                    //sh "npm install"
                 }
             }
         }
