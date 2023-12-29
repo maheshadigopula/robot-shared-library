@@ -54,6 +54,7 @@ def call(component)
                             }
                         }
                     }
+            }
 
             stage('Downloading Dependencies'){
                 steps{
