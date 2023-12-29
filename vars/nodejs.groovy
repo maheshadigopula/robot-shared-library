@@ -9,7 +9,6 @@ def call(component)
 {
     pipeline {
         agent any
-        tools {nodejs "nodejs"}
         environment {
             sonar = credentials('sonar')
             sonar_URL = "172.31.0.179"
@@ -61,7 +60,7 @@ def call(component)
                 //     expression { env.TAG_NAME != null } 
                 //     }
                 steps {
-                    sh "npm install"
+                    sh "yum install npm"
                     sh "zip ${COMPONENT}-${TAG_NAME}.zip node_modules server.js"
                     sh "ls -ltr"
                 }
