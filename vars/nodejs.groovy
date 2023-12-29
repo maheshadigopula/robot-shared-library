@@ -56,10 +56,14 @@ def call(component)
                     }
             }
 
-            stage('Downloading Dependencies'){
-                steps{
-                    sh "echo Installing npm!!!!!!"
-                    //sh "npm install"
+            stage('Preparing the artifact') {
+                // when { 
+                //     expression { env.TAG_NAME != null } 
+                //     }
+                steps {
+                    sh "npm install"
+                    sh "zip ${COMPONENT}-${TAG_NAME}.zip node_modules server.js"
+                    sh "ls -ltr"
                 }
             }
         }
