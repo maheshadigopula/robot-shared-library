@@ -9,7 +9,7 @@ def call(component)
 {
     pipeline {
         agent any
-
+        tools {nodejs "nodejs"}
         environment {
             sonar = credentials('sonar')
             sonar_URL = "172.31.0.179"
