@@ -60,7 +60,7 @@ def call(component)
                 //     expression { env.TAG_NAME != null } 
                 //     }
                 steps {
-                    sh "yum install npm"
+                    sh "npm install"
                     sh "zip ${COMPONENT}-${TAG_NAME}.zip node_modules server.js"
                     sh "ls -ltr"
                 }
