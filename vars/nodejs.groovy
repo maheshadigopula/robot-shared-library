@@ -10,7 +10,7 @@ def call(component)
     pipeline {
         agent any
         environment {
-            sonar = credentials('sonar')
+            //sonar = credentials('sonar')
             sonar_URL = "172.31.0.179"
         }
         stages{
