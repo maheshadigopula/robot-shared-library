@@ -59,22 +59,22 @@ def call(component)
                     }
             }
 
-            // stage('Artifact Validation On Nexus') {
-            //     when { 
-            //         expression { env.TAG_NAME != null } 
-            //         }
-            //     steps {
-            //         sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
-            //         script {
-            //             env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true" )
-            //         }
-            //     }
-            // }
+            stage('Artifact Validation On Nexus') {
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    }
+                steps {
+                    sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
+                    script {
+                        env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://3.89.195.68:8081/service/rest/repository/browse/shipping/ | grep ${compnent}-${TAG_NAME}.zip || true" )
+                    }
+                }
+            }
 
             stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
-                    // expression { env.UPLOAD_STATUS == "" }
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "mvn clean package"
@@ -87,7 +87,7 @@ def call(component)
             stage('Uploading the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
-                    // expression { env.UPLOAD_STATUS == "" }
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${component}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${component}/${component}-${TAG_NAME}.zip"
