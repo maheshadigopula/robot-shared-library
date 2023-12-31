@@ -14,6 +14,7 @@ def call(component)
         environment {
             //SONAR = credentials('sonar')
             SONAR_URL = "172.31.0.179"
+
         }
         stages{
             stage('Lint checks'){
@@ -57,15 +58,24 @@ def call(component)
             }
 
             stage('Preparing the artifact') {
-                // when { 
-                //     expression { env.TAG_NAME != null } 
-                //     }
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    }
                 steps {
-                    sh ''' 
-                        mvn clean package
-                        mv target/shipping-1.0.jar shipping.jar
-                        zip -r shipping-${TAG_NAME}.zip shipping.jar
-                    '''
+                    sh "mvn clean package"
+                    sh "mv target/${component}-1.0.jar ${component}.jar"
+                    sh "zip -r ${component}-${TAG_NAME}.zip ${component}.jar"
+
+                }
+            }
+
+            stage('Uploading the artifact') {
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    expression { env.UPLOAD_STATUS == "" }
+                    }
+                steps {
+                    sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${component}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${component}/${component}-${TAG_NAME}.zip"
                 }
             }
             
