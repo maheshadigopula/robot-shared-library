@@ -63,8 +63,8 @@ def call(component)
                 steps {
                     sh ''' 
                         mvn clean package
-                        mv target/${component}-1.0.jar ${component}.jar
-                        zip -r ${component}.zip ${component}.jar
+                        mv target/shipping-1.0.jar shipping.jar
+                        zip -r ${component}-${TAG_NAME}.zip ${component}.jar
                     '''
                 }
             }
