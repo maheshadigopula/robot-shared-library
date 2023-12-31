@@ -59,17 +59,17 @@ def call(component)
                     }
             }
 
-            stage('Artifact Validation On Nexus') {
-                when { 
-                    expression { env.TAG_NAME != null } 
-                    }
-                steps {
-                    sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
-                    script {
-                        env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true" )
-                    }
-                }
-            }
+            // stage('Artifact Validation On Nexus') {
+            //     when { 
+            //         expression { env.TAG_NAME != null } 
+            //         }
+            //     steps {
+            //         sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
+            //         script {
+            //             env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true" )
+            //         }
+            //     }
+            // }
 
             stage('Preparing the artifact') {
                 when { 
