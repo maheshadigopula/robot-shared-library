@@ -74,7 +74,7 @@ def call(component)
             stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
-                    expression { env.UPLOAD_STATUS == "" }
+                    // expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "mvn clean package"
@@ -87,7 +87,7 @@ def call(component)
             stage('Uploading the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
-                    expression { env.UPLOAD_STATUS == "" }
+                    // expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${component}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${component}/${component}-${TAG_NAME}.zip"
