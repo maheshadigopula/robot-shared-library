@@ -55,6 +55,19 @@ def call(component)
                         }
                     }
             }
+
+            stage('Preparing the artifact') {
+                // when { 
+                //     expression { env.TAG_NAME != null } 
+                //     }
+                steps {
+                    sh ''' 
+                        mvn clean package
+                        mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+                        zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                    '''
+                }
+            }
             
 
         }
