@@ -12,7 +12,7 @@ def call(component)
         agent any
 
         environment {
-            SONAR = credentials('sonar')
+            //SONAR = credentials('sonar')
             SONAR_URL = "172.31.0.179"
         }
         stages{
