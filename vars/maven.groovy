@@ -58,9 +58,9 @@ def call(component)
             }
 
             stage('Preparing the artifact') {
-                when { 
-                    expression { env.TAG_NAME != null } 
-                    }
+                // when { 
+                //     expression { env.TAG_NAME != null } 
+                //     }
                 steps {
                     sh "mvn clean package"
                     sh "mv target/${component}-1.0.jar ${component}.jar"
