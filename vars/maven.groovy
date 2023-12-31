@@ -15,6 +15,7 @@ def call(component)
             //SONAR = credentials('sonar')
             SONAR_URL = "172.31.0.179"
             NEXUS = credentials('NEXUS')
+            NEXUS_URL ="172.31.0.167"
 
         }
         stages{
